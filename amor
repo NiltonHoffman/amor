@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Progressiva</title>
+    <style>
+        body {
+            font-family: nunito, sans-serif;
+            text-align: center;
+            background-color: #180718;
+            margin: 0;
+            padding: 50px;
+        }
+        .countdown {
+            font-size: 2em;
+            color: #ffffff;
+        }
+        .date {
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juntos</h1>
+    <div class="date">Eu te Amo</div>
+    <div class="countdown" id="countdown"></div>
+
+    <script>
+        // Data e hora alvo
+        const startDate = new Date('2024-06-07T21:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = now - startDate;
+
+            // Calcula o total de dias passados
+            const totalDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Calcula meses, dias, horas, minutos e segundos
+            const months = Math.floor(totalDays / 30);
+            const days = totalDays % 30;
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Atualiza o elemento com o id "countdown"
+            document.getElementById('countdown').innerHTML = `
+                ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, 
+                ${hours} hora${hours !== 1 ? 's' : ''}, ${minutes} minuto${minutes !== 1 ? 's' : ''}, 
+                ${seconds} segundo${seconds !== 1 ? 's' : ''}
+            `;
+
+            // Atualiza a contagem progressiva a cada segundo
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Inicializa a contagem progressiva
+        updateCountdown();
+    </script>
+</body>
+</html>
